@@ -23,3 +23,19 @@ We have to provide an Objective-C file that exposes our Swift to the React Nativ
 
 PBPlayer.m native module includes a RCT_EXPORT_MODULE macro, which exports and registers the native module class with React Native. React Native will not expose any function or properties of PBPlayerView to React JavaScript unless explicitly done. To do so we have used RCT_EXPORT_METHOD() and RCT_EXPORT_VIEW_PROPERTY() macro. These macros exports the properties and methods of the view instantiated by the bridge module PBPlayer.swift.
 
+```` 
+```
+#import <Foundation/Foundation.h>
+#import "React/RCTViewManager.h"
+#import <React/RCTLog.h>
+
+@interface RCT_EXTERN_MODULE(PBPlayer, RCTViewManager)
+RCT_EXPORT_VIEW_PROPERTY(shouldPlay, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(isPlaying, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(url, NSString)
+RCT_EXPORT_VIEW_PROPERTY(onEnd, RCTDirectEventBlock);
+RCT_EXTERN_METHOD(playPauseAction: (nonnull NSNumber *)node callback: (RCTResponseSenderBlock)callback)
+@end
+```
+````
+
