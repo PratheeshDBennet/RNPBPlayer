@@ -9,7 +9,7 @@ In order to bridge the native components to RN has provided a class called RCTBr
 
 # RCTViewManager 
 
-RCTViewManager has the view property which instantiates a native view to be managed by the module. Override this to return a custom view instance, which may be preconfigured with default properties, subviews, etc. 
+RCTViewManager has the view property which instantiates a native view to be managed by the bridge module. Override this to return a custom view instance, which may be preconfigured with default properties, subviews, etc. 
 
 Let’s take a sample use case. We have a video player app in RN. But the native player components are developed in Swift using AVFoundation. So to communicate between the RN components and the native player component in Swift, we are going to use RCTBridge. 
 
