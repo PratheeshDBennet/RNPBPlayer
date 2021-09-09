@@ -67,8 +67,8 @@ NativeModules.PBPlayer.playPauseAction(
           isPlaying: value
         })
         console.log("Is playing status is" + value)
-      })
- ```` 
+})
+```` 
 ```
 
 # RCTDirectEventBlock
