@@ -43,6 +43,7 @@ RCT_EXTERN_METHOD(playPauseAction: (nonnull NSNumber *)node callback: (RCTRespon
 
 The exported function will find a particular view using addBlock which contains the views registry based on the react tag thereby allowing to call the method on the displaying native component
 
+Player.swift
 ```` 
 ```
 @objc func playPauseAction(_ node: NSNumber, callback: @escaping RCTResponseSenderBlock) {
@@ -54,3 +55,21 @@ The exported function will find a particular view using addBlock which contains 
   }
 ```
 ````
+
+In JS the playPauseAction is called like as in below, 
+
+```` 
+```
+NativeModules.PBPlayer.playPauseAction(
+      ReactNative.findNodeHandle(this.mySwiftComponentInstance),
+      value => {
+        this.setState({
+          isPlaying: value
+        })
+        console.log("Is playing status is" + value)
+})
+```
+````
+
+# RCTDirectEventBlock
+These block types can be used for mapping event handlers from JS to view. They are basically NSDictionary objects from the iOS Native components which can be listened in the JS. 
