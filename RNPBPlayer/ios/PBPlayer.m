@@ -14,5 +14,7 @@ RCT_EXPORT_VIEW_PROPERTY(shouldPlay, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(isPlaying, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(url, NSString)
 RCT_EXPORT_VIEW_PROPERTY(onEnd, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onPlay, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onPause, RCTDirectEventBlock);
 RCT_EXTERN_METHOD(playPauseAction: (nonnull NSNumber *)node callback: (RCTResponseSenderBlock)callback)
 @end

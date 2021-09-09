@@ -10,7 +10,9 @@ public class PBPlayerView: UIView {
   public typealias DissmissBlock = () -> Void
   public var onDismiss: DissmissBlock?
   @objc var onEnd: RCTDirectEventBlock!
-  @objc public var url: String = "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4" {
+  @objc var onPlay: RCTDirectEventBlock!
+  @objc var onPause: RCTDirectEventBlock!
+  @objc public var url: String = "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" {
     didSet {
       setupPBPlayer()
     }
@@ -235,6 +237,7 @@ public class PBPlayerView: UIView {
     self.isPlaying ? self.createTimer(): self.invalidateDurationTimer()
     self.setDurationLabel()
     self.overLayAction()
+    self.isPlaying ? self.onPlay?(["isPlaying": self.isPlaying]) : self.onPause?(["isPlaying": self.isPlaying])
   }
   private func togglePlayPauseTitle() {
     isPlaying ?
@@ -270,12 +273,12 @@ public class PBPlayerView: UIView {
       self.overLayAction()
       self.onDismiss?()
     }
-    controller.onPlay = { [weak self] in
-      guard let self = self else { return }
-    }
-    controller.onPause = { [weak self] in
-      guard let self = self else { return }
-    }
+//    controller.onPlay = { [weak self] in
+//      guard let self = self else { return }
+//    }
+//    controller.onPause = { [weak self] in
+//      guard let self = self else { return }
+//    }
     controller.modalPresentationStyle = .currentContext
     self.findViewController()?.present(controller, animated: true) {
     }
@@ -343,7 +346,7 @@ public class PBPlayerView: UIView {
   }
   @objc private func playerDidFinishPlaying(note: NSNotification) {
     print("Video Finished")
-    self.onEnd!(["isPlaying": self.isPlaying])
+    self.onEnd?(["isPlaying": self.isPlaying])
     isPlaying = false
     self.player.seek(to: CMTime.zero)
     playerState = .finished
