@@ -12,6 +12,8 @@ export default class App extends Component {
     this.state = { isPlaying: false }
     this.handleClick = this.handleClick.bind(this)
     this.handlePlayerEnd = this.handlePlayerEnd.bind(this)
+    this.handlePlayerPlay = this.handlePlayerPlay.bind(this)
+    this.handlePlayerPause = this.handlePlayerPause.bind(this)
   }
   handleClick() {
     NativeModules.PBPlayer.playPauseAction(
@@ -29,6 +31,12 @@ export default class App extends Component {
       isPlaying: event.nativeEvent.isPlaying
     })
   }
+  handlePlayerPlay(event) {
+    console.log("Player end")
+  }
+  handlePlayerPause(event) {
+    console.log("Player pause")
+  }
   static defaultProps = {
     url: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
   };
@@ -42,6 +50,12 @@ export default class App extends Component {
           onEnd={
             this.handlePlayerEnd
           }
+          onPlay={ 
+            this.handlePlayerPlay
+          } 
+          onPause={
+            this.handlePlayerPause
+          } 
         />
         <Button
           title={this.state.isPlaying ? "Pause" : "Play"}
