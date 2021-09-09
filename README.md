@@ -36,6 +36,8 @@ RCT_EXPORT_VIEW_PROPERTY(shouldPlay, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(isPlaying, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(url, NSString)
 RCT_EXPORT_VIEW_PROPERTY(onEnd, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onPlay, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onPause, RCTDirectEventBlock);
 RCT_EXTERN_METHOD(playPauseAction: (nonnull NSNumber *)node callback: (RCTResponseSenderBlock)callback)
 @end
 ```
@@ -72,4 +74,12 @@ NativeModules.PBPlayer.playPauseAction(
 ````
 
 # RCTDirectEventBlock
-These block types can be used for mapping event handlers from JS to view. They are basically NSDictionary objects from the iOS Native components which can be listened in the JS. 
+These block types can be used for mapping event handlers from JS to view. They are basically NSDictionary objects from the iOS Native components which can be listened in the JS. Let's take a case where JS needs to capture events like onPause, onEnd, onPlay from iOS Native, the PlayerView.swift has RCTDirectEventBlock properties declared, 
+
+```` 
+```
+ @objc var onEnd: RCTDirectEventBlock!
+ @objc var onPlay: RCTDirectEventBlock!
+ @objc var onPause: RCTDirectEventBlock!
+```
+````
