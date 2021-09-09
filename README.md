@@ -11,6 +11,8 @@ In order to bridge the native components to RN has provided a class called RCTBr
 
 RCTViewManager has the view property which instantiates a native view to be managed by the bridge module. Override this to return a custom view instance, which may be preconfigured with default properties, subviews, etc. 
 
+Native viewas are created and manipulated by subclasses of RCTViewManager. They are basically singletons. RCTViewManager delegates for the views, sending event back to the JS bridge. 
+
 Let’s take a sample use case. We have a video player app in RN. But the native player components are developed in Swift using AVFoundation. So to communicate between the RN components and the native player component in Swift, we are going to use RCTBridge. 
 
 In our example we have class PBPlayerView which has the AVPlayer implementation that needs to be bridged to JS exporting certain properties and functions over to the JS so that the JS can communicate to the native components. 
@@ -39,3 +41,16 @@ RCT_EXTERN_METHOD(playPauseAction: (nonnull NSNumber *)node callback: (RCTRespon
 ```
 ````
 
+The exported function will find a particular view using addBlock which contains the views registry based on the react tag thereby allowing to call the method on the displaying native component
+
+```` 
+```
+@objc func playPauseAction(_ node: NSNumber, callback: @escaping RCTResponseSenderBlock) {
+    DispatchQueue.main.async {
+      guard let view = self.bridge.uiManager.view(forReactTag: node) as? PBPlayerView else { return }
+      view.playPauseAction()
+      callback([view.isPlaying])
+    }
+  }
+```
+````
