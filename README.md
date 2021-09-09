@@ -1,4 +1,4 @@
-# RNPBPlayer:  A sample project React Native - iOS Native Component Bridging
+# RNPBPlayer:  A sample project for React Native - iOS Native Component Bridging
 This sample project explains a simple bridging between React Native and iOS Native components. So the background is though there are many common components readily available in React Native framework certain solutions needs platforms specific implementations. In order to achieve this, we technically have to bridge React Native to the components developed in native iOS.
 
 ![alt text](https://github.com/PratheeshDBennet/RNPBPlayer/blob/main/Screenshot%202021-09-09%20at%205.08.34%20PM.png)
@@ -10,6 +10,8 @@ In order to bridge the native components to RN has provided a class called RCTBr
 # RCTViewManager 
 
 RCTViewManager has the view property which instantiates a native view to be managed by the bridge module. Override this to return a custom view instance, which may be preconfigured with default properties, subviews, etc. 
+
+Native viewas are created and manipulated by subclasses of RCTViewManager. They are basically singletons. RCTViewManager delegates for the views, sending event back to the JS bridge. 
 
 Let’s take a sample use case. We have a video player app in RN. But the native player components are developed in Swift using AVFoundation. So to communicate between the RN components and the native player component in Swift, we are going to use RCTBridge. 
 
@@ -39,3 +41,16 @@ RCT_EXTERN_METHOD(playPauseAction: (nonnull NSNumber *)node callback: (RCTRespon
 ```
 ````
 
+The exported function will find a particular view using addBlock which contains the views registry based on the react tag thereby allowing to call the method on the displaying native component
+
+```` 
+```
+@objc func playPauseAction(_ node: NSNumber, callback: @escaping RCTResponseSenderBlock) {
+    DispatchQueue.main.async {
+      guard let view = self.bridge.uiManager.view(forReactTag: node) as? PBPlayerView else { return }
+      view.playPauseAction()
+      callback([view.isPlaying])
+    }
+  }
+```
+````
