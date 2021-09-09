@@ -32,13 +32,19 @@ export default class App extends Component {
     })
   }
   handlePlayerPlay(event) {
-    console.log("Player end")
+    console.log("Player play", event.nativeEvent)
+    this.setState({
+      isPlaying: event.nativeEvent.isPlaying
+    })
   }
   handlePlayerPause(event) {
-    console.log("Player pause")
+    console.log("Player pause", event.nativeEvent)
+    this.setState({
+      isPlaying: event.nativeEvent.isPlaying
+    })
   }
   static defaultProps = {
-    url: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+    url: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
   };
   render() {
     console.log("After", this.props.url)
@@ -53,7 +59,7 @@ export default class App extends Component {
           onPlay={ 
             this.handlePlayerPlay
           } 
-          onPause={
+          onPause ={
             this.handlePlayerPause
           } 
         />
