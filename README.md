@@ -1,4 +1,4 @@
-# RNPBPlayer:  A sample project React Native - iOS Native Component Bridging
+# RNPBPlayer:  A sample project for React Native - iOS Native Component Bridging
 This sample project explains a simple bridging between React Native and iOS Native components. So the background is though there are many common components readily available in React Native framework certain solutions needs platforms specific implementations. In order to achieve this, we technically have to bridge React Native to the components developed in native iOS.
 
 ![alt text](https://github.com/PratheeshDBennet/RNPBPlayer/blob/main/Screenshot%202021-09-09%20at%205.08.34%20PM.png)
