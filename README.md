@@ -68,8 +68,8 @@ NativeModules.PBPlayer.playPauseAction(
         })
         console.log("Is playing status is" + value)
 })
-```` 
 ```
+````
 
 # RCTDirectEventBlock
 These block types can be used for mapping event handlers from JS to view. They are basically NSDictionary objects from the iOS Native components which can be listened in the JS. 
