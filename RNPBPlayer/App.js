@@ -40,7 +40,8 @@ export default class App extends Component {
          ref={(component) => this.mySwiftComponentInstance = component}
           url={this.props.url}
           onEnd={
-            this.handlePlayerEnd}
+            this.handlePlayerEnd
+          }
         />
         <Button
           title={this.state.isPlaying ? "Pause" : "Play"}
