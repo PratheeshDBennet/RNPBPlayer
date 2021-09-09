@@ -30,7 +30,7 @@ export default class App extends Component {
     })
   }
   static defaultProps = {
-    url: "https://manifest.prod.boltdns.net/manifest/v1/hls/v4/clear/5434391461001/9e362b59-9198-4a95-9278-8c62b401123f/10s/master.m3u8?fastly_token=NjBmOWE5MzVfNTE4NTc3NTc1OTNmMWZjZmY2Njk0NTJmZGI3NjViMzg1MjNlNmQwN2Y0NjI3M2QzMDRhYTlmNTBiOThmN2Y4Yw%3D%3D"
+    url: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
   };
   render() {
     console.log("After", this.props.url)
