@@ -74,12 +74,32 @@ NativeModules.PBPlayer.playPauseAction(
 ````
 
 # RCTDirectEventBlock
-These block types can be used for mapping event handlers from JS to view. They are basically NSDictionary objects from the iOS Native components which can be listened in the JS. Let's take a case where JS needs to capture events like onPause, onEnd, onPlay from iOS Native, the PlayerView.swift has RCTDirectEventBlock properties declared, 
+These block types can be used for mapping event handlers from JS to view. They are basically NSDictionary objects from the iOS Native components which can be listened in the JS. Let's take a case where JS needs to capture events like onPause, onEnd, onPlay from iOS Native, the PlayerView.swift has RCTDirectEventBlock properties declared as, 
 
 ```` 
 ```
  @objc var onEnd: RCTDirectEventBlock!
  @objc var onPlay: RCTDirectEventBlock!
  @objc var onPause: RCTDirectEventBlock!
+```
+````
+The events are handled in JS as below, 
+
+```` 
+```
+<View style={styles.container}>
+        <PBPlayer style={styles.nativeBtn}
+         ref={(component) => this.mySwiftComponentInstance = component}
+          url={this.props.url}
+          onEnd={
+            this.handlePlayerEnd
+          }
+          onPlay={ 
+            this.handlePlayerPlay
+          } 
+          onPause ={
+            this.handlePlayerPause
+          } 
+ />
 ```
 ````
